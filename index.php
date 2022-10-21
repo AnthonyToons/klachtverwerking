@@ -15,10 +15,8 @@
     // add records to the log
     $log->info('data:', ['name' => $_POST['name'], 'email' => $_POST['email'], 'desc' => $_POST['text']]);
 
-    require 'vendor/phpmailer/PHPMailer/src/Exception.php';
-    require 'vendor/phpmailer/PHPMailer/src/PHPMailer.php';
-    require 'vendor/phpmailer/PHPMailer/src/SMTP.php';
     include 'ww.php';
+
     if (isset($_POST['test'])){
         $mail = new PHPMailer(true);
         try {
@@ -27,15 +25,15 @@
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = $mailadd;                     //SMTP username
-            $mail->Password   = $wachtwoord;                               //SMTP password
+            $mail->Username   = EMAIL;                     //SMTP username
+            $mail->Password   = WACHTWOORD;                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
             //Recipients
-            $mail->setFrom($mailadd);
+            $mail->setFrom(EMAIL);
             $mail->addAddress($_POST['email'], $_POST['name']);     //Add a recipient
-            $mail->addCC($mailadd);
+            $mail->addCC(EMAIL);
 
 
             //Content
